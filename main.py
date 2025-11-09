@@ -21,6 +21,7 @@ from datetime import date, timedelta
 import requests
 import certifi
 from dateutil import parser as dateparser
+from requests_oauthlib import OAuth1
 
 # FiscalData API endpoint (v2)
 BASE_URL = (
@@ -147,28 +148,41 @@ def build_tweet_text() -> str:
 
 def post_to_x(text: str) -> dict:
     """
-    Post a tweet via X API v2 using a user-context bearer token.
-    Requires:
-        X_BEARER_TOKEN env var (OAuth2 user access token with tweet.write)
+    Post a tweet via X API v2 using OAuth 1.0a User Context.
+    Requires these env vars:
+      - X_API_KEY
+      - X_API_SECRET
+      - X_ACCESS_TOKEN
+      - X_ACCESS_TOKEN_SECRET
     """
-    token = os.getenv("X_BEARER_TOKEN")
-    if not token:
-        raise RuntimeError("X_BEARER_TOKEN is not set; cannot post to X.")
+    api_key = os.getenv("X_API_KEY")
+    api_secret = os.getenv("X_API_SECRET")
+    access_token = os.getenv("X_ACCESS_TOKEN")
+    access_token_secret = os.getenv("X_ACCESS_TOKEN_SECRET")
 
-    url = "https://api.x.com/2/tweets"  # Use the host your X dev portal specifies
-    headers = {
-        "Authorization": f"Bearer {token}",
-        "Content-Type": "application/json",
-    }
+    if not all([api_key, api_secret, access_token, access_token_secret]):
+        raise RuntimeError("Missing one or more X OAuth 1.0a credentials.")
+
+    # X API endpoint for creating a tweet
+    url = "https://api.twitter.com/2/tweets"
+
+    auth = OAuth1(
+        api_key,
+        api_secret,
+        access_token,
+        access_token_secret
+    )
+
     payload = {"text": text}
 
     resp = requests.post(
         url,
         json=payload,
-        headers=headers,
+        auth=auth,
         timeout=20,
         verify=certifi.where(),
     )
+
     try:
         resp.raise_for_status()
     except Exception:
@@ -176,6 +190,7 @@ def post_to_x(text: str) -> dict:
             f"Failed to post tweet. "
             f"Status={resp.status_code}, Body={resp.text}"
         )
+
     return resp.json()
 
 

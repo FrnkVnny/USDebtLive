@@ -1,0 +1,23 @@
+name: Daily U.S. Debt Post
+
+on:
+  schedule:
+    # Run every day at 23:00 CET (22:00 UTC)
+    - cron: "0 22 * * *"
+  workflow_dispatch:  # allows manual trigger
+
+jobs:
+  tweet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+
+      - name: Run debt post script
+        env:
+          X_BEARER_TOKEN: ${{ secrets.X_BEARER_TOKEN }}
+          DRY_RUN: 0
+        run: python main.py

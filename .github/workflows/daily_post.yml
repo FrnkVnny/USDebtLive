@@ -3,7 +3,7 @@ name: Daily U.S. Debt Post
 on:
   schedule:
     # Run every day at 23:00 CET (22:00 UTC)
-    - cron: "0 22 * * *"
+    - cron: "0 00 * * *"
   workflow_dispatch:  # allows manual trigger
 
 jobs:

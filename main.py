@@ -134,8 +134,8 @@ def build_tweet_text() -> str:
     tweet = (
         "🇺🇸 U.S. Debt Update\n\n"
         f"💰 Today: ${today_debt:,.2f}\n"
-        f"📅 Yesterday ({y_str}): ${y_debt:,.2f}\n"
-        f"🗓️ 1 Week Ago ({w_str}): ${w_debt:,.2f}\n\n"
+        f"📅 Yesterday: ${y_debt:,.2f}\n"
+        f"🗓️ 1 Week Ago: ${w_debt:,.2f}\n\n"
         f"📈 Daily Increase: {format_billions(daily_inc)}\n"
         f"📆 Weekly Increase: {format_billions(weekly_inc)}\n\n"
         "#USDebt #DebtCrisis #FiscalReality"

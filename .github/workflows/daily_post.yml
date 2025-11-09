@@ -3,11 +3,11 @@ name: Daily U.S. Debt Post
 on:
   schedule:
     # Run every day at 23:00 CET (22:00 UTC)
-    - cron: "0 00 * * *"
+    - cron: "0 23 * * 1-5"
   workflow_dispatch:  # allows manual trigger
 
 jobs:
-  tweet:
+  post:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

@@ -1,0 +1,35 @@
+# 🇺🇸 USDebtLive – Automatic U.S. Debt Tracker Bot
+
+This project automatically posts daily updates about the U.S. national debt using official Treasury data from the **Debt to the Penny API**.
+
+Each day, it:
+1. Fetches the most recent total U.S. public debt value from the [FiscalData Treasury API](https://fiscaldata.treasury.gov/datasets/debt-to-the-penny).
+2. Compares it with values from the previous business day and the same day one week earlier.
+3. Calculates **daily** and **weekly** increases.
+4. Formats a tweet with the new figures.
+5. Posts automatically to X (Twitter) via the X API.
+
+---
+
+## 🚀 Features
+
+- Fully automated daily tweets via **GitHub Actions**
+- Pulls official data directly from the U.S. Treasury
+- Automatically handles weekends and holidays
+- Optional **dry-run** mode for safe testing
+- Built with clean, production-ready Python code
+
+---
+
+## 🧠 Example Tweet
+
+🇺🇸 U.S. Debt Update
+
+💰 Today: $38,118,268,221,748.03
+📅 Yesterday (2025-11-08): $38,098,000,000,000.00
+🗓️ 1 Week Ago (2025-11-01): $37,980,000,000,000.00
+
+📈 Daily Increase: +$20.27 B
+📆 Weekly Increase: +$138.27 B
+
+#USDebt #DebtCrisis #FiscalReality

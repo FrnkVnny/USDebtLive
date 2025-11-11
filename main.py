@@ -136,8 +136,8 @@ def build_tweet_text() -> str:
         f"💰 Today: ${today_debt:,.2f}\n"
         f"📅 Yesterday: ${y_debt:,.2f}\n"
         f"🗓️ 1 Week Ago: ${w_debt:,.2f}\n\n"
-        f"📈 Daily {"Increase" if daily_inc >= 0 else "Decrease"}: {format_billions(daily_inc)}\n"
-        f"📆 Weekly {"Increase" if weekly_inc >= 0 else "Decrease"}: {format_billions(weekly_inc)}\n\n"
+        f"{'📈' if daily_inc >= 0 else '📉'} Daily {'Increase' if daily_inc >= 0 else 'Decrease'}: {format_billions(daily_inc)}\n"
+        f"📆 Weekly {'Increase' if weekly_inc >= 0 else 'Decrease'}: {format_billions(weekly_inc)}\n\n"
         "#USDebt #DebtCrisis #FiscalReality"
     )
 

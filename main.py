@@ -30,7 +30,7 @@ BASE_URL = (
 )
 
 # How old the latest record is allowed to be before we refuse to tweet (safety)
-MAX_STALE_DAYS = 3
+MAX_STALE_DAYS = 5
 
 
 # ---------- Low-level helpers ----------
